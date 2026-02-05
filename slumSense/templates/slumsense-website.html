@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slumsense - Urban Intelligence Platform</title>
+    <link rel="stylesheet"  href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a1a;
+            --secondary: #ff6b35;
+            --accent: #004e89;
+            --light-bg: #f5f5f5;
+            --text-dark: #1a1a1a;
+            --text-light: #ffffff;
+            --border: #e0e0e0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--primary);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--secondary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-button {
+            background: var(--secondary);
+            color: var(--text-light);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .cta-button:hover {
+            background: #ff5520;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #2a2a2a 100%);
+            color: var(--text-light);
+            padding: 100px 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 78, 137, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            color: var(--secondary);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: slideInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: slideInUp 0.8s ease-out 0.4s backwards;
+        }
+
+        .hero-buttons .cta-button {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+
+        .secondary-button {
+            background: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+
+        .secondary-button:hover {
+            background: var(--secondary);
+            color: var(--text-light);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: var(--text-light);
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: -50px auto 0;
+            position: relative;
+            z-index: 10;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            animation: fadeInScale 0.8s ease-out;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-dark);
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 6rem 2rem;
+            background: var(--light-bg);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-dark);
+            opacity: 0.7;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--text-light);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            border-left: 4px solid var(--secondary);
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .service-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .service-card:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-left-color: var(--accent);
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .service-card p {
+            color: var(--text-dark);
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 2rem;
+            background: var(--text-light);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .features-content h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .feature-list li span {
+            color: var(--text-dark);
+            opacity: 0.8;
+        }
+
+        .features-image {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--secondary) 100%);
+            border-radius: 8px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            font-size: 4rem;
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+            color: var(--text-light);
+            padding: 4rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .cta-section p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: var(--text-light);
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 107, 53, 0.3);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--text-light);
+            opacity: 0.7;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            opacity: 1;
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            opacity: 0.7;
+        }
+
+        /* Scroll Animations */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                margin: -30px 1rem 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .features-image {
+                height: 300px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons .cta-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <nav>
+        <div class="logo">Slum<span>sense</span></div>
+        <ul class="nav-links">
+            <li><a href="{{ url_for('about') }}">About Us</a></li>
+            <li><a href="#Services">Services</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="{{ url_for('index') }}">Interactive Map</a></li>
+            <li><a href="{{ url_for('contact') }}">Contact</a></li>
+        </ul>
+        <a href="{{ url_for('login') }}" class="cta-button">Get Started</a>
+    </nav>
+</header>
+
+<div class="chat-support" id="chatSupport">
+            <div class="chat-icon" onclick="toggleChat()">💬</div>
+        </div>
+
+        <div class="chat-popup" id="chatPopup">
+            <div class="chat-header">
+                <h3>AI Assistant</h3>
+                <div class="chat-header-buttons">
+                    <button class="header-btn" onclick="clearChat()" title="Clear Chat">🗑️</button>
+                    <button class="header-btn" onclick="toggleChat()" title="Close">✕</button>
+                </div>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <button class="" id="loginBtn"></button>
+                <form id="loginForm"></form>
+                <button class="close-btn" id="closeLogin">&times;</button>
+                <div class="welcome-message">
+                    <h4>👋 Welcome!</h4>
+                    <p>How can I assist you today?</p>
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typingIndicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="chat-input">
+                <input type="text" id="messageInput" placeholder="Type your message..."
+                    onkeypress="handleKeyPress(event)">
+                <button class="send-btn" id="sendBtn" onclick="sendMessage()">➤</button>
+            </div>
+        </div>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>Intelligent <span>Urban Intelligence</span> Platform</h1>
+        <p>Transform urban development with real-time data analytics and smart community insights</p>
+        <div class="hero-buttons">
+            <a href="{{ url_for('login') }}" class="cta-button">Start Free Trial</a>
+            <button class="cta-button secondary-button">Learn More</button>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<div class="stats">
+    <div class="stat-item">
+        <div class="stat-number">5000</div>
+        <div class="stat-label">Data Points Analyzed</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Cities Connected</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">98%</div>
+        <div class="stat-label">Accuracy Rate</div>
+    </div>
+    <div class="stat-item">
+        <div class="stat-number">24/7</div>
+        <div class="stat-label">Real-Time Monitoring</div>
+    </div>
+</div>
+
+<!-- Services Section -->
+<section class="services" id="services">
+    <div class="section-container">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">Comprehensive solutions for urban intelligence and community development</p>
+        <div class="services-grid">
+            <div class="service-card scroll-reveal">
+                <div class="service-icon">📊</div>
+                <h3>Data Analytics</h3>
+                <p>Advanced analytics to understand urban patterns, population dynamics, and infrastructure needs with precision.</p>
+            </div>
+            <div class="service-card scroll-reveal">
+                <div class="service-icon">🏘️</div>
+                <h3>Community Mapping</h3>
+                <p>Detailed mapping of urban communities with demographic insights and development opportunities identification.</p>
+            </div>
+            <div class="service-card scroll-reveal">
+                <div class="service-icon">🎯</div>
+                <h3>Impact Assessment</h3>
+                <p>Evaluate the real-world impact of urban development initiatives and community programs with measurable results.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="features" id="features">
+    <div class="features-grid">
+        <div class="features-content">
+            <h2>Why Choose Slumsense?</h2>
+            <ul class="feature-list">
+                <li>
+                    <span class="feature-icon">✓</span>
+                    <span><strong>Real-Time Data:</strong> Access live updates from ground sources and sensors</span>
+                </li>
+                <li>
+                    <span class="feature-icon">✓</span>
+                    <span><strong>AI-Powered Insights:</strong> Machine learning algorithms predict trends and opportunities</span>
+                </li>
+                <li>
+                    <span class="feature-icon">✓</span>
+                    <span><strong>Community Driven:</strong> Direct feedback and participation from residents</span>
+                </li>
+                <li>
+                    <span class="feature-icon">✓</span>
+                    <span><strong>Scalable Platform:</strong> Works for cities of any size, from neighborhoods to metros</span>
+                </li>
+                <li>
+                    <span class="feature-icon">✓</span>
+                    <span><strong>Actionable Reports:</strong> Custom dashboards for stakeholders and decision makers</span>
+                </li>
+            </ul>
+        </div>
+        <div class="features-image">
+            📍 Urban Intelligence Hub
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section" id="contact">
+    <div class="cta-content">
+        <h2>Ready to Transform Your City?</h2>
+        <p>Join hundreds of cities using Slumsense to create smarter, more inclusive urban development.</p>
+        <button class="cta-button">Schedule a Demo</button>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>About Slumsense</h4>
+            <p style="opacity: 0.7; margin-bottom: 1rem;">Leading urban intelligence platform empowering cities and communities worldwide.</p>
+        </div>
+        <div class="footer-section">
+            <h4>Product</h4>
+            <ul>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Pricing</a></li>
+                <li><a href="#">Security</a></li>
+                <li><a href="#">API</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Company</h4>
+            <ul>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Careers</a></li>
+                <li><a href="#">Press</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h4>Legal</h4>
+            <ul>
+                <li><a href="#">Privacy</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Cookies</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 Slumsense. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Smooth scroll animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Counter animation for stats
+    function animateCounter(element, target, duration = 2000) {
+        let current = 0;
+        const increment = target / (duration / 16);
+        
+        const counter = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                element.textContent = target;
+                clearInterval(counter);
+            } else {
+                element.textContent = Math.floor(current);
+            }
+        }, 16);
+    }
+
+    // Trigger counter animation when stats section is visible
+    const statsSection = document.querySelector('.stats');
+    let statsAnimated = false;
+
+    const statsObserver = new IntersectionObserver(entries => {
+        if (entries[0].isIntersecting && !statsAnimated) {
+            statsAnimated = true;
+            document.querySelectorAll('.stat-number').forEach(el => {
+                const text = el.textContent;
+                const number = parseInt(text.replace(/\D/g, ''));
+                animateCounter(el, number);
+            });
+        }
+    }, { threshold: 0.5 });
+
+    statsObserver.observe(statsSection);
+
+    const chatPopup = document.getElementById('chatPopup');
+const chatMessages = document.getElementById('chatMessages');
+const messageInput = document.getElementById('messageInput');
+const sendBtn = document.getElementById('sendBtn');
+const typingIndicator = document.getElementById('typingIndicator');
+
+function toggleChat() {
+    chatPopup.classList.toggle('active');
+    if (chatPopup.classList.contains('active')) {
+        messageInput.focus();
+    }
+}
+
+function handleKeyPress(event) {
+    if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+    }
+}
+
+function addMessage(content, isUser = false) {
+    const welcomeMsg = chatMessages.querySelector('.welcome-message');
+    if (welcomeMsg) {
+        welcomeMsg.remove();
+    }
+
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `message ${isUser ? 'user' : 'assistant'}`;
+
+    const contentDiv = document.createElement('div');
+    contentDiv.className = 'message-content';
+    contentDiv.textContent = content;
+
+    messageDiv.appendChild(contentDiv);
+    chatMessages.appendChild(messageDiv);
+
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function sendMessage() {
+    const message = messageInput.value.trim();
+
+    if (!message) return;
+
+    // Disable input while processing
+    messageInput.disabled = true;
+    sendBtn.disabled = true;
+
+    // Add user message
+    addMessage(message, true);
+    messageInput.value = '';
+
+    // Show typing indicator
+    typingIndicator.classList.add('active');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+
+    try {
+        const response = await fetch('/chat', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: message })
+        });
+
+        const data = await response.json();
+
+        // Hide typing indicator
+        typingIndicator.classList.remove('active');
+
+        if (data.success) {
+            addMessage(data.response, false);
+        } else {
+            addMessage('Sorry, something went wrong. Please try again.', false);
+        }
+    } catch (error) {
+        typingIndicator.classList.remove('active');
+        addMessage('Error connecting to server. Please check your connection.', false);
+        console.error('Error:', error);
+    } finally {
+        // Re-enable input
+        messageInput.disabled = false;
+        sendBtn.disabled = false;
+        messageInput.focus();
+    }
+}
+
+async function clearChat() {
+    if (!confirm('Are you sure you want to clear the chat history?')) {
+        return;
+    }
+
+    try {
+        const response = await fetch('/clear', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            chatMessages.innerHTML = `
+                        <div class="welcome-message">
+                            <h4>👋 Welcome!</h4>
+                            <p>How can I assist you today?</p>
+                        </div>
+                    `;
+        }
+    } catch (error) {
+        console.error('Error clearing chat:', error);
+        alert('Failed to clear chat. Please try again.');
+    }
+}
+</script>
+
+</body>
+</html>
