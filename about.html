@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - SlumSense</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Slab:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        /* ===== CSS Reset & Base Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Color Palette - Pleasant, earthy tones */
+            --primary-color: #2a7c6f;
+            --secondary-color: #f4a261;
+            --accent-color: #e76f51;
+            --light-color: #f8f9fa;
+            --dark-color: #264653;
+            --text-color: #333;
+            --text-light: #666;
+            --bg-color: #f9f7f3;
+            --card-bg: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Background Elements ===== */
+        .background-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circle, .square {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.1;
+            filter: blur(40px);
+        }
+
+        .circle {
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+        }
+
+        .square {
+            border-radius: 20px;
+            background: linear-gradient(45deg, var(--secondary-color), transparent);
+        }
+
+        .c1 {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            right: 5%;
+            animation: float 25s infinite linear;
+        }
+
+        .c2 {
+            width: 200px;
+            height: 200px;
+            bottom: 15%;
+            left: 5%;
+            animation: float 30s infinite linear reverse;
+        }
+
+        .c3 {
+            width: 150px;
+            height: 150px;
+            top: 50%;
+            left: 10%;
+            animation: float 20s infinite linear;
+        }
+
+        .sq1 {
+            width: 250px;
+            height: 250px;
+            top: 20%;
+            left: 5%;
+            animation: float 35s infinite linear;
+        }
+
+        .sq2 {
+            width: 180px;
+            height: 180px;
+            bottom: 10%;
+            right: 10%;
+            animation: float 28s infinite linear reverse;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(20px, -20px) rotate(90deg);
+            }
+            50% {
+                transform: translate(-15px, 15px) rotate(180deg);
+            }
+            75% {
+                transform: translate(10px, -10px) rotate(270deg);
+            }
+        }
+
+        /* ===== Header & Navigation ===== */
+        .header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 28px;
+            color: var(--primary-color);
+        }
+
+        .logo h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .logo-highlight {
+            color: var(--primary-color);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 16px;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--primary-color);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background-color: var(--dark-color);
+            transition: var(--transition);
+        }
+
+        /* ===== Hero Section ===== */
+        .about-hero {
+            padding: 150px 0 80px;
+            min-height: 40vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .about-hero-content {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-tagline {
+            font-size: 3rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--dark-color);
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            position: relative;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: rgba(42, 124, 111, 0.2);
+            z-index: -1;
+        }
+
+        .about-sub-tagline {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== Mission Section ===== */
+        .mission-section {
+            padding: 80px 0;
+            background-color: #f0f0f0;
+        }
+
+        .mission-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .mission-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .mission-text h2 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 20px;
+        }
+
+        .mission-text p {
+            color: var(--text-light);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .mission-stats {
+            flex: 1;
+            min-width: 300px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .mission-stat {
+            background-color: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .mission-stat:hover {
+            transform: translateY(-5px);
+        }
+
+        .mission-stat i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .mission-stat h3 {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+
+        .mission-stat p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ===== Services Section ===== */
+        .services-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            color: var(--dark-color);
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 50px;
+        }
+
+        .services-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .service-category {
+            flex: 1;
+            min-width: 500px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .service-category:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        .predictive-service {
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .analytic-service {
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            color: white;
+            background-color: var(--accent-color);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .analytic-service .service-icon {
+            background-color: var(--primary-color);
+        }
+
+        .service-header h3 {
+            font-size: 2rem;
+            color: var(--dark-color);
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+        }
+
+        .service-features li:hover {
+            padding-left: 10px;
+        }
+
+        .service-features li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(42, 124, 111, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .predictive-service .feature-icon {
+            color: var(--accent-color);
+            background-color: rgba(231, 111, 81, 0.1);
+        }
+
+        .feature-text h4 {
+            font-size: 1.2rem;
+            color: var(--dark-color);
+            margin-bottom: 5px;
+        }
+
+        .feature-text p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* ===== Charts Section ===== */
+        .charts-section {
+            padding: 80px 0;
+            background-color: #f0f0f0;
+        }
+
+        .charts-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .chart-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .chart-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .chart-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            gap: 15px;
+        }
+
+        .chart-icon {
+            font-size: 2rem;
+            color: white;
+            background-color: var(--primary-color);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-header h3 {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .chart-visual {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .chart-bar {
+            flex: 1;
+            background-color: var(--primary-color);
+            border-radius: 5px 5px 0 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .chart-bar:hover {
+            transform: scaleY(1.05);
+        }
+
+        .chart-bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .chart-bar-value {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .chart-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* ===== Team Section ===== */
+        .team-section {
+            padding: 80px 0;
+        }
+
+        .team-container {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .team-member {
+            text-align: center;
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            width: 300px;
+        }
+
+        .team-member:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .member-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            overflow: hidden;
+            border: 5px solid var(--bg-color);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .team-member:hover .member-image img {
+            transform: scale(1.1);
+        }
+
+        .member-name {
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+
+        .member-role {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* ===== Footer ===== */
+        .footer {
+            background-color: var(--dark-color);
+            color: white;
+            padding: 70px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo .logo {
+            margin-bottom: 20px;
+        }
+
+        .footer-logo .logo h2 {
+            color: white;
+            font-size: 2.2rem;
+        }
+
+        .footer-tagline {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 300px;
+        }
+
+        .footer-links h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ddd;
+            text-decoration: none;
+            transition: var(--transition);
+            padding: 10px 0;
+        }
+
+        .social-link:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .social-link i {
+            font-size: 1.5rem;
+            width: 30px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            color: #aaa;
+        }
+
+        .contact-info i {
+            margin-right: 5px;
+            color: var(--secondary-color);
+        }
+
+        /* ===== Scroll to Top Button ===== */
+        .scroll-top-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .scroll-top-btn.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top-btn:hover {
+            background-color: var(--dark-color);
+            transform: translateY(-5px);
+        }
+
+        /* ===== Responsive Design ===== */
+        @media (max-width: 992px) {
+            .about-tagline {
+                font-size: 2.5rem;
+            }
+            
+            .service-category {
+                min-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                padding: 30px 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                transition: 0.3s;
+                z-index: 999;
+                gap: 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-item {
+                margin: 15px 0;
+            }
+            
+            .about-tagline {
+                font-size: 2rem;
+            }
+            
+            .about-sub-tagline {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2.3rem;
+            }
+            
+            .mission-content {
+                flex-direction: column;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .about-tagline {
+                font-size: 1.8rem;
+            }
+            
+            .about-hero {
+                padding: 130px 0 50px;
+            }
+            
+            .mission-stat {
+                padding: 20px;
+            }
+            
+            .service-category {
+                padding: 30px 20px;
+            }
+            
+            .team-member {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .scroll-top-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Animated Background Elements -->
+    <div class="background-elements">
+        <div class="circle c1"></div>
+        <div class="circle c2"></div>
+        <div class="circle c3"></div>
+        <div class="square sq1"></div>
+        <div class="square sq2"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <span class="logo-icon"><i class="fas fa-home-heart"></i></span>
+                    <h1>Slum<span class="logo-highlight">Sense</span></h1>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li class="nav-item"><a href="landing.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link active">About Us</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="about-hero-content">
+                <h2 class="about-tagline animate__animated animate__fadeInUp">
+                    About <span class="highlight">SlumSense</span>
+                </h2>
+                <p class="about-sub-tagline animate__animated animate__fadeInUp animate__delay-1s">
+                    We're on a mission to transform urban informal settlements through data-driven insights, predictive analytics, and community-centered solutions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-content">
+                <div class="mission-text">
+                    <h2 class="animate__animated animate__fadeInLeft">Our Mission & Vision</h2>
+                    <p class="animate__animated animate__fadeInLeft animate__delay-1s">
+                        SlumSense was founded with a singular vision: to leverage technology and data analytics to improve living conditions in urban informal settlements across India.
+                    </p>
+                    <p class="animate__animated animate__fadeInLeft animate__delay-2s">
+                        We believe that data-driven insights can empower governments, NGOs, and communities to make informed decisions, allocate resources effectively, and create sustainable change in some of the most vulnerable urban areas.
+                    </p>
+                    <p class="animate__animated animate__fadeInLeft animate__delay-3s">
+                        Our platform combines real-time monitoring, predictive analytics, and interactive visualization tools to provide comprehensive solutions for urban development challenges.
+                    </p>
+                </div>
+                
+                <div class="mission-stats">
+                    <div class="mission-stat animate__animated animate__fadeInRight">
+                        <i class="fas fa-bullseye"></i>
+                        <h3>100+</h3>
+                        <p>Communities Impacted</p>
+                    </div>
+                    <div class="mission-stat animate__animated animate__fadeInRight animate__delay-1s">
+                        <i class="fas fa-database"></i>
+                        <h3>50K+</h3>
+                        <p>Data Points Collected</p>
+                    </div>
+                    <div class="mission-stat animate__animated animate__fadeInRight animate__delay-2s">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>85%</h3>
+                        <p>Prediction Accuracy</p>
+                    </div>
+                    <div class="mission-stat animate__animated animate__fadeInRight animate__delay-3s">
+                        <i class="fas fa-users"></i>
+                        <h3>12</h3>
+                        <p>Partner Organizations</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeInUp">Our Services</h2>
+            <p class="section-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+                We offer comprehensive analytical and predictive solutions to address urban settlement challenges
+            </p>
+            
+            <div class="services-container">
+                <!-- Predictive Services -->
+                <div class="service-category predictive-service animate__animated animate__fadeInLeft">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-crystal-ball"></i>
+                        </div>
+                        <h3>Predictive Analytics</h3>
+                    </div>
+                    
+                    <ul class="service-features">
+                        <li>
+                            <div class="feature-icon">
+                                <i class="fas fa-tint"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Water Availability Forecasting</h4>
+                                <p>Predict water availability in different zones based on historical data, weather patterns, and consumption trends</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-icon">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Garbage Overflow Rate Prediction</h4>
+                                <p>Forecast garbage accumulation rates to optimize waste collection schedules and resource allocation</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>High-Risk Zone Identification</h4>
+                                <p>Identify areas with high risk of sanitation issues, water shortages, or health hazards based on specific dates and conditions</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Analytical Services -->
+                <div class="service-category analytic-service animate__animated animate__fadeInRight">
+                    <div class="service-header">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h3>Analytical Insights</h3>
+                    </div>
+                    
+                    <ul class="service-features">
+                        <li>
+                            <div class="feature-icon">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Water Stress Index Analysis</h4>
+                                <p>Calculate and visualize water stress levels across different regions to identify critical areas needing intervention</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-icon">
+                                <i class="fas fa-clipboard-check"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Complaints Resolution Tracking</h4>
+                                <p>Monitor total vs. resolved complaints to measure service efficiency and identify improvement areas</p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="feature-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Resource Gap Analysis</h4>
+                                <p>Compare water availability vs. requirement and garbage collection capacity vs. generation rates</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charts Section -->
+    <section class="charts-section">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeInUp">Data Visualization & Insights</h2>
+            <p class="section-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+                Interactive charts and analytics that drive decision-making
+            </p>
+            
+            <div class="charts-container">
+                <!-- Chart 1 -->
+                <div class="chart-card animate__animated animate__fadeInUp">
+                    <div class="chart-header">
+                        <div class="chart-icon">
+                            <i class="fas fa-water"></i>
+                        </div>
+                        <h3>Water Stress Index</h3>
+                    </div>
+                    <div class="chart-visual" id="waterStressChart">
+                        <!-- Dynamic bars will be inserted by JS -->
+                    </div>
+                    <div class="chart-info">
+                        <span>Low Stress</span>
+                        <span>High Stress</span>
+                    </div>
+                </div>
+                
+                <!-- Chart 2 -->
+                <div class="chart-card animate__animated animate__fadeInUp animate__delay-1s">
+                    <div class="chart-header">
+                        <div class="chart-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h3>Complaints Resolution</h3>
+                    </div>
+                    <div class="chart-visual" id="complaintsChart">
+                        <!-- Dynamic bars will be inserted by JS -->
+                    </div>
+                    <div class="chart-info">
+                        <span>Total Complaints</span>
+                        <span>Resolved</span>
+                    </div>
+                </div>
+                
+                <!-- Chart 3 -->
+                <div class="chart-card animate__animated animate__fadeInUp animate__delay-2s">
+                    <div class="chart-header">
+                        <div class="chart-icon">
+                            <i class="fas fa-balance-scale"></i>
+                        </div>
+                        <h3>Water Availability vs Requirement</h3>
+                    </div>
+                    <div class="chart-visual" id="waterChart">
+                        <!-- Dynamic bars will be inserted by JS -->
+                    </div>
+                    <div class="chart-info">
+                        <span>Availability</span>
+                        <span>Requirement</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title animate__animated animate__fadeInUp">Meet Our Team</h2>
+            <p class="section-subtitle animate__animated animate__fadeInUp animate__delay-1s">
+                The passionate individuals driving innovation and impact at SlumSense
+            </p>
+            
+            <div class="team-container">
+                <!-- Team Member 1 -->
+                <div class="team-member animate__animated animate__fadeInLeft">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="John Doe">
+                    </div>
+                    <h3 class="member-name">John Doe</h3>
+                    <p class="member-role">Project Lead & Data Scientist</p>
+                    <p>Specializes in predictive modeling and urban data analytics with 8+ years of experience.</p>
+                    <div class="member-social">
+                        <a href="https://github.com/johndoe" class="social-btn" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/john-doe" class="social-btn" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-member animate__animated animate__fadeInRight">
+                    <div class="member-image">
+                        <img src="https://images.unsplash.com/photo-1494790108755-2616c113a1c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Jane Smith">
+                    </div>
+                    <h3 class="member-name">Jane Smith</h3>
+                    <p class="member-role">Community Engagement Lead</p>
+                    <p>Focuses on field research, community partnerships, and implementing data-driven solutions on the ground.</p>
+                    <div class="member-social">
+                        <a href="https://github.com/janesmith" class="social-btn" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/jane-smith" class="social-btn" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <div class="logo">
+                        <span class="logo-icon"><i class="fas fa-home-heart"></i></span>
+                        <h2>Slum<span class="logo-highlight">Sense</span></h2>
+                    </div>
+                    <p class="footer-tagline">Transforming urban settlements through data-driven solutions.</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>Connect With Our Team</h3>
+                    <div class="social-links">
+                        <a href="https://github.com/slumsense" class="social-link" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                            <span>SlumSense GitHub</span>
+                        </a>
+                        
+                        <a href="https://linkedin.com/in/john-doe" class="social-link" target="_blank" aria-label="LinkedIn - John Doe">
+                            <i class="fab fa-linkedin"></i>
+                            <span>John Doe - Project Lead</span>
+                        </a>
+                        
+                        <a href="https://linkedin.com/in/jane-smith" class="social-link" target="_blank" aria-label="LinkedIn - Jane Smith">
+                            <i class="fab fa-linkedin"></i>
+                            <span>Jane Smith - Data Scientist</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 SlumSense. All rights reserved. | Committed to sustainable urban development</p>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> contact@slumsense.org | <i class="fas fa-phone"></i> +91 98765 43210</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top-btn" id="scrollTopBtn">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <script>
+        // DOM Content Loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Navigation Toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            hamburger.addEventListener('click', function() {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking on a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // Scroll to Top Button
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.add('active');
+                } else {
+                    scrollTopBtn.classList.remove('active');
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
+            // Create Water Stress Chart
+            const waterStressChart = document.getElementById('waterStressChart');
+            const stressData = [30, 50, 75, 90, 65, 40];
+            const stressLabels = ['Zone A', 'Zone B', 'Zone C', 'Zone D', 'Zone E', 'Zone F'];
+            
+            stressData.forEach((value, index) => {
+                const bar = document.createElement('div');
+                bar.className = 'chart-bar';
+                bar.style.height = `${value}%`;
+                bar.style.backgroundColor = value > 70 ? 'var(--accent-color)' : 
+                                           value > 50 ? 'var(--secondary-color)' : 'var(--primary-color)';
+                
+                const valueLabel = document.createElement('div');
+                valueLabel.className = 'chart-bar-value';
+                valueLabel.textContent = `${value}%`;
+                
+                const label = document.createElement('div');
+                label.className = 'chart-bar-label';
+                label.textContent = stressLabels[index];
+                
+                bar.appendChild(valueLabel);
+                bar.appendChild(label);
+                waterStressChart.appendChild(bar);
+                
+                // Add animation
+                bar.style.transform = 'scaleY(0)';
+                setTimeout(() => {
+                    bar.style.transition = 'transform 0.8s ease';
+                    bar.style.transform = 'scaleY(1)';
+                }, index * 100);
+            });
+            
+            // Create Complaints Chart
+            const complaintsChart = document.getElementById('complaintsChart');
+            const complaintsData = [
+                {total: 85, resolved: 65},
+                {total: 120, resolved: 95},
+                {total: 70, resolved: 50},
+                {total: 95, resolved: 80},
+                {total: 110, resolved: 90}
+            ];
+            
+            complaintsData.forEach((data, index) => {
+                const barContainer = document.createElement('div');
+                barContainer.style.display = 'flex';
+                barContainer.style.flexDirection = 'column';
+                barContainer.style.flex = 10;
+                barContainer.style.gap = '80px';
+                
+                // Total complaints bar
+                const totalBar = document.createElement('div');
+                totalBar.className = 'chart-bar';
+                totalBar.style.height = `${data.total}%`;
+                totalBar.style.backgroundColor = 'var(--primary-color)';
+                
+                const totalValue = document.createElement('div');
+                totalValue.className = 'chart-bar-value';
+                totalValue.textContent = data.total;
+                
+                const totalLabel = document.createElement('div');
+                totalLabel.className = 'chart-bar-label';
+                totalLabel.textContent = `Week ${index + 1}`;
+                
+                totalBar.appendChild(totalValue);
+                totalBar.appendChild(totalLabel);
+                
+                // Resolved complaints bar
+                const resolvedBar = document.createElement('div');
+                resolvedBar.className = 'chart-bar';
+                resolvedBar.style.height = `${data.resolved}%`;
+                resolvedBar.style.backgroundColor = 'var(--secondary-color)';
+                
+                const resolvedValue = document.createElement('div');
+                resolvedValue.className = 'chart-bar-value';
+                resolvedValue.textContent = data.resolved;
+                
+                resolvedBar.appendChild(resolvedValue);
+                
+                barContainer.appendChild(totalBar);
+                barContainer.appendChild(resolvedBar);
+                complaintsChart.appendChild(barContainer);
+                
+                // Add animation
+                totalBar.style.transform = 'scaleY(0)';
+                resolvedBar.style.transform = 'scaleY(0)';
+                setTimeout(() => {
+                    totalBar.style.transition = 'transform 0.8s ease';
+                    resolvedBar.style.transition = 'transform 0.5s ease';
+                    totalBar.style.transform = 'scaleY(1)';
+                    resolvedBar.style.transform = 'scaleY(1)';
+                }, index * 100);
+            });
+            
+            // Create Water Availability vs Requirement Chart
+            const waterChart = document.getElementById('waterChart');
+            const waterData = [
+                {available: 70, required: 85},
+                {available: 60, required: 90},
+                {available: 80, required: 75},
+                {available: 65, required: 95},
+                {available: 75, required: 80}
+            ];
+            
+            waterData.forEach((data, index) => {
+                const barContainer = document.createElement('div');
+                barContainer.style.display = 'flex';
+                barContainer.style.flexDirection = 'column';
+                barContainer.style.flex = 10;
+                barContainer.style.gap = '80px';
+                
+                // Available water bar
+                const availableBar = document.createElement('div');
+                availableBar.className = 'chart-bar';
+                availableBar.style.height = `${data.available}%`;
+                availableBar.style.backgroundColor = 'var(--primary-color)';
+                
+                const availableValue = document.createElement('div');
+                availableValue.className = 'chart-bar-value';
+                availableValue.textContent = `${data.available}%`;
+                
+                const availableLabel = document.createElement('div');
+                availableLabel.className = 'chart-bar-label';
+                availableLabel.textContent = `Area ${index + 1}`;
+                
+                availableBar.appendChild(availableValue);
+                availableBar.appendChild(availableLabel);
+                
+                // Required water bar
+                const requiredBar = document.createElement('div');
+                requiredBar.className = 'chart-bar';
+                requiredBar.style.height = `${data.required}%`;
+                requiredBar.style.backgroundColor = 'var(--accent-color)';
+                
+                const requiredValue = document.createElement('div');
+                requiredValue.className = 'chart-bar-value';
+                requiredValue.textContent = `${data.required}%`;
+                
+                requiredBar.appendChild(requiredValue);
+                
+                barContainer.appendChild(availableBar);
+                barContainer.appendChild(requiredBar);
+                waterChart.appendChild(barContainer);
+                
+                // Add animation
+                availableBar.style.transform = 'scaleY(0)';
+                requiredBar.style.transform = 'scaleY(0)';
+                setTimeout(() => {
+                    availableBar.style.transition = 'transform 0.8s ease';
+                    requiredBar.style.transition = 'transform 0.8s ease';
+                    availableBar.style.transform = 'scaleY(1)';
+                    requiredBar.style.transform = 'scaleY(1)';
+                }, index * 100);
+            });
+            
+            // Add hover effects to charts
+            const chartBars = document.querySelectorAll('.chart-bar');
+            chartBars.forEach(bar => {
+                bar.addEventListener('mouseenter', function() {
+                    this.style.opacity = '0.9';
+                });
+                
+                bar.addEventListener('mouseleave', function() {
+                    this.style.opacity = '1';
+                });
+            });
+            
+            // Animate elements on scroll
+            const animateOnScroll = function() {
+                const elements = document.querySelectorAll('.animate__animated');
+                
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight / 1.2;
+                    
+                    if (elementPosition < screenPosition) {
+                        const animationClass = element.classList[1];
+                        element.classList.add(animationClass);
+                    }
+                });
+            };
+            
+            // Initial check for elements in view
+            animateOnScroll();
+            
+            // Check on scroll
+            window.addEventListener('scroll', animateOnScroll);
+            
+            // Parallax effect for background elements
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                const backgroundElements = document.querySelectorAll('.circle, .square');
+                
+                backgroundElements.forEach(element => {
+                    const speed = element.classList.contains('c1') || element.classList.contains('sq1') ? 0.3 : 
+                                 element.classList.contains('c2') || element.classList.contains('sq2') ? 0.5 : 0.4;
+                    
+                    const yPos = -(scrolled * speed);
+                    element.style.transform = `translateY(${yPos}px)`;
+                });
+            });
+            
+            // Team member card interactions
+            const teamMembers = document.querySelectorAll('.team-member');
+            teamMembers.forEach(member => {
+                member.addEventListener('mouseenter', function() {
+                    const image = this.querySelector('.member-image img');
+                    image.style.transform = 'scale(1.1)';
+                });
+                
+                member.addEventListener('mouseleave', function() {
+                    const image = this.querySelector('.member-image img');
+                    image.style.transform = 'scale(1)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
