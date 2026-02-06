@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Slumsense</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<div class="login-container" id="loginContainer">
+    <!-- Resident Login -->
+    <div class="login-box" id="residentLogin">
+        <div class="login-header">
+            <h1>Slum<span style="color: var(--secondary);">sense</span></h1>
+            <h2 style="font-size: 1.3rem; color: var(--text-dark); margin-top: 1rem;">Resident Login</h2>
+            <p>Report and track community issues</p>
+        </div>
+
+        <form onsubmit="handleResidentLogin(event)">
+            <div class="form-group">
+                <label for="resPhone">Mobile Number</label>
+                <input type="tel" id="resPhone" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+
+            <div class="form-group">
+                <label for="resPassword">Password</label>
+                <input type="password" id="resPassword" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="login-footer">
+            <p>Don't have an account? <a onclick="toggleToSignup('resident')">Sign up here</a></p>
+            <p style="margin-top: 1rem;"><a onclick="switchRole()">Login as Government Official?</a></p>
+        </div>
+    </div>
+
+    <!-- Government Login -->
+    <div class="login-box" id="governmentLogin" style="display: none;">
+        <div class="login-header">
+            <h1>Slum<span style="color: var(--secondary);">sense</span></h1>
+            <h2 style="font-size: 1.3rem; color: var(--text-dark); margin-top: 1rem;">Government Portal</h2>
+            <p>Manage community complaints and analytics</p>
+        </div>
+
+        <form onsubmit="handleGovernmentLogin(event)">
+            <div class="form-group">
+                <label for="govEmail">Official Email</label>
+                <input type="email" id="govEmail" placeholder="official@government.in" required>
+            </div>
+
+            <div class="form-group">
+                <label for="govPassword">Password</label>
+                <input type="password" id="govPassword" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="login-footer">
+            <p>Don't have access? <a onclick="toggleToSignup('government')">Register Official</a></p>
+            <p style="margin-top: 1rem;"><a onclick="switchRole()">Resident? Login here</a></p>
+        </div>
+    </div>
+
+    <!-- Resident Signup -->
+    <div class="login-box" id="residentSignup" style="display: none;">
+        <div class="login-header">
+            <h1>Slum<span style="color: var(--secondary);">sense</span></h1>
+            <h2 style="font-size: 1.3rem; color: var(--text-dark); margin-top: 1rem;">Create Account</h2>
+            <p>Join our community</p>
+        </div>
+
+        <form onsubmit="handleResidentSignup(event)">
+            <div class="form-group">
+                <label for="resName">Full Name</label>
+                <input type="text" id="resName" placeholder="Your name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="resSignupPhone">Mobile Number</label>
+                <input type="tel" id="resSignupPhone" placeholder="+91 XXXXX XXXXX" required>
+            </div>
+
+            <div class="form-group">
+                <label for="resSignupPassword">Password</label>
+                <input type="password" id="resSignupPassword" placeholder="Create a password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="resArea">Area/Slum Name</label>
+                <input type="text" id="resArea" placeholder="Your area" required>
+            </div>
+
+            <button type="submit" class="login-btn">Create Account</button>
+        </form>
+
+        <div class="login-footer">
+            <p>Already have an account? <a onclick="toggleToSignup('resident')">Login here</a></p>
+        </div>
+    </div>
+
+    <!-- Government Signup -->
+    <div class="login-box" id="governmentSignup" style="display: none;">
+        <div class="login-header">
+            <h1>Slum<span style="color: var(--secondary);">sense</span></h1>
+            <h2 style="font-size: 1.3rem; color: var(--text-dark); margin-top: 1rem;">Official Registration</h2>
+            <p>Register government personnel</p>
+        </div>
+
+        <form onsubmit="handleGovernmentSignup(event)">
+            <div class="form-group">
+                <label for="govName">Full Name</label>
+                <input type="text" id="govName" placeholder="Official Name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="govSignupEmail">Official Email</label>
+                <input type="email" id="govSignupEmail" placeholder="official@government.in" required>
+            </div>
+
+            <div class="form-group">
+                <label for="govSignupPassword">Password</label>
+                <input type="password" id="govSignupPassword" placeholder="Create a password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="govDepartment">Department</label>
+                <input type="text" id="govDepartment" placeholder="e.g. Sanitation, Water Works" required>
+            </div>
+
+            <button type="submit" class="login-btn">Register Official</button>
+        </form>
+
+        <div class="login-footer">
+            <p>Already have an account? <a onclick="toggleToSignup('government')">Login here</a></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    function switchRole() {
+        const resLogin = document.getElementById('residentLogin');
+        const govLogin = document.getElementById('governmentLogin');
+        const resSignup = document.getElementById('residentSignup');
+        const govSignup = document.getElementById('governmentSignup');
+        
+        resSignup.style.display = 'none';
+        govSignup.style.display = 'none';
+        
+        if (resLogin.style.display !== 'none') {
+            resLogin.style.display = 'none';
+            govLogin.style.display = 'block';
+        } else {
+            govLogin.style.display = 'none';
+            resLogin.style.display = 'block';
+        }
+    }
+
+    function toggleToSignup(role) {
+        const resLogin = document.getElementById('residentLogin');
+        const govLogin = document.getElementById('governmentLogin');
+        const resSignup = document.getElementById('residentSignup');
+        const govSignup = document.getElementById('governmentSignup');
+        
+        if (role === 'resident') {
+            if (resSignup.style.display === 'none') {
+                resLogin.style.display = 'none';
+                resSignup.style.display = 'block';
+            } else {
+                resSignup.style.display = 'none';
+                resLogin.style.display = 'block';
+            }
+        } else if (role === 'government') {
+            if (govSignup.style.display === 'none') {
+                govLogin.style.display = 'none';
+                govSignup.style.display = 'block';
+            } else {
+                govSignup.style.display = 'none';
+                govLogin.style.display = 'block';
+            }
+        }
+    }
+
+    async function handleGovernmentSignup(event) {
+        event.preventDefault();
+        const name = document.getElementById('govName').value;
+        const email = document.getElementById('govSignupEmail').value;
+        const password = document.getElementById('govSignupPassword').value;
+        const department = document.getElementById('govDepartment').value;
+        
+        try {
+            const response = await fetch('/api/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    type: 'government',
+                    name, 
+                    email, 
+                    password, 
+                    department 
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert('Official account created successfully! You can now login.');
+                toggleToSignup('government');
+            } else {
+                alert(result.error || 'Signup failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred during signup');
+        }
+    }
+
+    async function handleResidentLogin(event) {
+        event.preventDefault();
+        const phone = document.getElementById('resPhone').value;
+        const password = document.getElementById('resPassword').value;
+        
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'resident', phone, password })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Store user data in localStorage
+                localStorage.setItem('user', JSON.stringify({
+                    type: 'resident',
+                    ...result.user
+                }));
+                // Redirect to resident dashboard
+                window.location.href = "{{ url_for('resident_dashboard') }}";
+            } else {
+                alert(result.error || 'Login failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred during login');
+        }
+    }
+
+    async function handleGovernmentLogin(event) {
+        event.preventDefault();
+        const email = document.getElementById('govEmail').value;
+        const password = document.getElementById('govPassword').value;
+        
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ type: 'government', email, password })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Store user data in localStorage
+                localStorage.setItem('user', JSON.stringify({
+                    type: 'government',
+                    ...result.user
+                }));
+                // Redirect to government dashboard
+                window.location.href = "{{ url_for('government_dashboard') }}";
+            } else {
+                alert(result.error || 'Login failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred during login');
+        }
+    }
+
+    async function handleResidentSignup(event) {
+        event.preventDefault();
+        const name = document.getElementById('resName').value;
+        const phone = document.getElementById('resSignupPhone').value;
+        const password = document.getElementById('resSignupPassword').value;
+        const area = document.getElementById('resArea').value;
+        
+        try {
+            const response = await fetch('/api/signup', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, phone, password, area })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert('Account created successfully! You can now login.');
+                toggleToSignup('resident');
+            } else {
+                alert(result.error || 'Signup failed');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('An error occurred during signup');
+        }
+    }
+</script>
+
+</body>
+</html>
